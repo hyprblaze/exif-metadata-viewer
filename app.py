@@ -7,12 +7,31 @@ import json
 import csv
 
 
-st.title("EXIF Metadata Viewer & Remover")
+st.markdown(
+    """
+    <h1 style='text-align: center; margin-bottom: 0px;'>
+        EXIF Metadata Viewer & Remover
+    </h1>
 
-uploaded_file = st.file_uploader(
-    "Upload an image",
-    type=["jpg", "jpeg", "png"]
+    <p style='text-align: center; font-size:18px; margin-top: 5px;'>
+        Developed by <b>Neehaar C</b>
+    </p>
+
+    <p style='text-align: center; font-size:14px; color: gray;'>
+        Digital Forensics & Privacy Tool
+    </p>
+
+    <p style='text-align: center; font-size:16px;'>
+        <a href='https://github.com/hyprblaze' target='_blank'>
+            🔗 GitHub Profile
+        </a>
+    </p>
+
+    <hr>
+    """,
+    unsafe_allow_html=True
 )
+
 
 # Helper function
 # Helper function to convert EXIF GPS to decimal format
@@ -182,3 +201,4 @@ if uploaded_file:
             file_name="image_without_metadata.jpg",
             mime="image/jpeg"
         )
+
