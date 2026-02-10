@@ -40,11 +40,10 @@ uploaded_file = st.file_uploader(
     type=["jpg", "jpeg", "png"]
 )
 
-# Helper function
 # Helper function to convert EXIF GPS to decimal format
 def dms_to_decimal(dms, ref):
     try:
-        # Convert fraction to float
+        # Converts the fraction to float
         def frac_to_float(frac):
             if isinstance(frac, tuple):
                 return float(frac[0]) / float(frac[1])
@@ -138,7 +137,7 @@ if uploaded_file:
         for tag_id, value in exif_data.items():
             tag = ExifTags.TAGS.get(tag_id, tag_id)
 
-            # Convert bytes to string if needed
+            # Convert bytes to string --- if needed
             if isinstance(value, bytes):
                 try:
                     value = value.decode(errors="ignore")
@@ -147,7 +146,7 @@ if uploaded_file:
 
             metadata_dict[str(tag)] = str(value)
 
-        # ---------- TXT EXPORT ----------
+        # TXT EXPORT
         txt_buffer = io.StringIO()
         for key, value in metadata_dict.items():
             txt_buffer.write(f"{key}: {value}\n")
@@ -159,7 +158,7 @@ if uploaded_file:
             mime="text/plain"
         )
 
-        # ---------- JSON EXPORT ----------
+        # JSON EXPORT
         json_buffer = io.StringIO()
         json.dump(metadata_dict, json_buffer, indent=4)
 
@@ -170,7 +169,7 @@ if uploaded_file:
             mime="application/json"
         )
 
-        # ---------- CSV EXPORT ----------
+        # CSV EXPORT
         csv_buffer = io.StringIO()
         writer = csv.writer(csv_buffer)
         writer.writerow(["Tag", "Value"])
@@ -189,7 +188,7 @@ if uploaded_file:
         st.info("No metadata available to export.")
 
 
-    #METADATA removal
+    # METADATA removal
     st.subheader("Remove Metadata")
 
     if st.button("🧹 Remove Metadata from Image"):
@@ -208,3 +207,4 @@ if uploaded_file:
             file_name="image_without_metadata.jpg",
             mime="image/jpeg"
         )
+
